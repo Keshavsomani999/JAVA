@@ -1,0 +1,28 @@
+class circle{
+    circle(int r){
+        System.out.println("i am circle parameterized constructor");
+        this.radius = r;
+    }
+    public int radius;
+    public double area(){
+        return Math.PI*this.radius*this.radius;
+    }
+}
+class Cylinder extends circle{
+    Cylinder(int r,int h){
+        super(r);
+        System.out.println("i am cylinder perametrized constructor");
+        this.height = h;
+    }
+    public int height;
+    public double volume(){
+        return Math.PI*this.radius*this.radius*this.height;
+    }
+}
+public class ch10 {
+    public static void main(String[] args) {
+//        circle obj1 = new circle(12);
+
+        Cylinder obj = new Cylinder(12,22);
+    }
+}
