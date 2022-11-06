@@ -1,0 +1,65 @@
+
+#Explanation
+
+
+- Sorting using Selection sort
+
+Explanation:
+
+In the selection sort algorithm, initially, it takes the first element as the smallest element and after that, it compares it with another element if the next element is lesser than the selected element then these two elements are swapped.
+
+Test Cases:
+
+1. If all elements of an array are the same
+2. if the user wrong type of data
+
+Example
+
+Input: [2, 4, 5, 1, 7]
+
+Output: [1, 2, 4, 5, 7]
+
+
+#Explanation END
+
+
+import java.util.Scanner;
+public class SelectionSort {
+    int[] selectionsort(int arr[]) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int smallest = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[smallest]) {
+                    smallest = j;
+                }
+            }
+            // swap
+            int temp = arr[smallest];
+            arr[smallest] = arr[i];
+            arr[i] = temp;
+        }
+        return arr;
+    }
+
+    void printArray(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String args[]) {
+        SelectionSort ss = new SelectionSort();
+        System.out.println("How many element you want to enter: ");
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        System.out.println("Enter the " + n + " elements.");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Sorted Array Element");
+        ss.printArray(ss.selectionsort(arr));
+    }
+}
+
