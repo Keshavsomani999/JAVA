@@ -1,0 +1,80 @@
+Question :
+
+Given a string, remove characters until the string is made up of any two alternating characters. When you choose a character to remove, all instances of that character must be removed. Determine the longest string possible that contains just two alternating letters.
+
+Explanation:
+
+In this program, first, I create HashSet which will help me to figure out unique characters from the string, and after that, I convert this set into an array list for performing iteration on it. after that, I take two for loops to get the first and second characters from the string. and then I pass this character and string into the main function.
+
+In the main logic function, I take one for loop that runs till the last character of the string then I check the character is equal to any of the two characters and then we check if the character is arrived is equal to the last character then we return 0. else we assign character arrived to the last character and increment the count by one.
+
+Example
+
+Input:  10
+        beabeefeab
+
+Output: 5
+
+//program
+
+
+
+import java.io.*;
+import java.util.*;
+
+class find {
+    public static int alternate(String s) {
+        HashSet<Character> set = new HashSet<>();
+        for(int i = 0; i < s.length();i++){
+            set.add(s.charAt(i));
+        }
+        ArrayList<Character> list = new ArrayList<>(set);
+        int max = 0;
+        for (int i = 0; i < list.size()-1; i++) {
+            for (int j = 0; j < list.size(); j++) {
+                char c1 = list.get(i);
+                char c2 = list.get(j);
+                int result = logic(c1,c2,s);
+                if(max < result){
+                    max = result;
+                }
+            }
+        }
+        return max;
+    }
+    
+    static int logic(char c1,char c2, String s){
+        int count = 0;
+        char lchar = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if(c==c1 || c==c2){
+                if(c==lchar){
+                    return 0;
+                }
+                lchar = c;
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+public class TwoCharacter {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int l = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String s = bufferedReader.readLine();
+
+        int result = find.alternate(s);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
