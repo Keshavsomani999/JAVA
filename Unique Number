@@ -1,0 +1,19 @@
+Output :- 5
+
+public class uniq {
+    public static void main(String[] args) {
+        int l = 10;
+        int h = 15;
+        int count = 0;
+        for(int i =l;i<=h;i++){
+            String b = String.valueOf(i);
+            char c[] = b.toCharArray();
+            for (int j =0;j< c.length-1;j++){
+                if (c[j]!=c[j+1]){
+                    count++;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+}
