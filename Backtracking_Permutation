@@ -1,0 +1,42 @@
+#Explanation
+
+
+- Given an integer x, return true if x is a palindrome, and false otherwise.
+
+
+Example
+
+Input -
+
+S = “ABC”
+
+
+Output -
+
+“ABC”, “ACB”, “BAC”, “BCA”, “CBA”, “CAB”
+
+package vaibhav;
+
+public class backtrack_permutaion {
+	
+	public static void find(String str,String ans) {
+		if(str.length() == 0) {
+			System.out.println(ans);
+			return;
+		}
+		
+		for(int i=0;i<str.length();i++) {
+			
+			char curr = str.charAt(i);
+			String str1 = str.substring(0,i)+str.substring(i+1);
+			find(str1,ans+curr);
+		}
+	};
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str = "abc";
+		find(str,"");
+	}
+
+}
