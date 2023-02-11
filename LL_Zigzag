@@ -1,0 +1,144 @@
+#Explanation
+
+
+- Given a linked list, rearrange it such that the converted list should be of the form a < b > c < d > e < f … where a, b, c… are consecutive data nodes of the linked list.
+
+
+Example
+
+Input -
+
+1->2->3->4->5->
+
+
+Output -
+
+1->5->2->4->3->
+
+package vaibhav;
+
+import java.util.*;
+
+
+public class LL_Zigzag {
+	
+	public static class Node{
+		int data;
+		Node next;
+		
+		public Node(int data) {
+			this.data = data;
+			this.next = null;
+		}
+		
+	}
+		public static Node head;
+		public static Node tail;
+		
+		public void addFirst(int data) {
+			Node newNode = new Node(data);
+			
+			if(head == null) {
+				head = tail = newNode;
+				return;
+			}
+			
+			newNode.next = head;
+			head = newNode;
+		}
+		
+		public void addLast(int data) {
+			Node newNode = new Node(data);
+			
+			if(head == null) {
+				head = tail = newNode;
+				return;
+			}
+			
+			tail.next = newNode;
+			tail = newNode;
+		}
+		
+		public void print() {
+			
+			if(head == null ) {
+				System.out.println("LL is empty");
+				return;
+			}
+			Node temp = head;
+			
+			while(temp != null) {
+				System.out.print(temp.data+"->");
+				temp = temp.next;
+			}
+			System.out.println();
+		}
+	
+	
+	
+	public void zigzag() {
+		
+		// find mid
+		
+		Node slow = head;
+		Node fast = head.next;
+		
+		while(fast != null && fast.next != null) {
+			
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		
+		Node mid = slow;
+		
+		
+		// reverse 2nd half
+		
+		Node curr = mid.next;
+		mid.next = null;
+		Node prev = null;
+		Node next;
+		
+		while(curr != null) {
+			next = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = next;
+		}
+		
+		Node left = head;
+		Node right = prev;
+		Node nextL, nextR;
+		
+		while(left != null && right != null) {
+			
+			nextL = left.next;
+			left.next = right;
+			nextR = right.next;
+			right.next = nextL;
+			
+			left = nextL;
+			right = nextR;
+		}
+		
+		
+		// alternate merging
+	}
+	
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		LL_Zigzag ll = new LL_Zigzag();
+		
+		ll.addLast(1);
+		ll.addLast(2);
+		ll.addLast(3);
+		ll.addLast(4);
+		ll.addLast(5);
+		ll.print();
+		ll.zigzag();
+		ll.print();
+	}
+
+}
