@@ -1,0 +1,126 @@
+#Explanation
+
+
+- Swap nodes in a linked list without swapping data
+
+
+Example
+
+Input - 
+
+1->2->3->4->5->6->7->
+
+x = 3, y = 5
+
+
+Output -
+
+1->2->5->4->3->6->7->
+
+package vaibhav;
+
+import java.util.*;
+
+public class LL_Swap {
+	
+	public class Node{
+		int data;
+		Node next;
+		
+		Node(int data){
+			this.data=data;
+			this.next = null;
+		}
+	}
+	
+	public static Node head;
+	public static Node tail;
+	
+	public void addFirst(int data) {
+		
+		Node newNode = new Node(data);
+		
+		if(head== null) {
+			head = tail = newNode;
+			return;
+		}
+		
+		newNode.next = head;
+		head = newNode;
+	}
+	
+	public void print() {
+		
+		if(head == null) {
+			System.out.println("LL is empty");
+			return;
+		}
+		
+		Node temp = head;
+		
+		while(temp!=null) {
+			System.out.print(temp.data+"->");
+			temp = temp.next;
+		}
+		System.out.println();
+	}
+	
+	public void swap(int x, int y) {
+		
+		if(x==y) {
+			return;
+		}
+		
+		Node CurrX = head, PrevX = null;
+		
+		while(CurrX != null && CurrX.data != x ) {
+			PrevX = CurrX;
+			CurrX = CurrX.next;
+			
+		}
+		
+		Node CurrY = head, PrevY = null;
+		while(CurrY != null  && CurrY.data != y) {
+			PrevY = CurrY;
+			CurrY = CurrY.next;
+		}
+		
+		if(CurrX == null || CurrY == null) {
+			return;
+		}
+		
+		if(PrevX != null) {
+			PrevX.next = CurrY;
+		}
+		else {
+			head = PrevX;
+		}
+		
+		if(PrevY != null) {
+			PrevY.next = CurrX;
+		}else {
+			head = PrevY;
+		}
+		
+		Node temp = CurrY.next;
+		CurrY.next = CurrX.next;
+		CurrX.next = temp;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		LL_Swap ll = new LL_Swap();
+		
+		ll.addFirst(7);
+		ll.addFirst(6);
+		ll.addFirst(5);
+		ll.addFirst(4);
+		ll.addFirst(3);
+		ll.addFirst(2);
+		ll.addFirst(1);
+		ll.print();
+		ll.swap(5, 3);
+		ll.print();
+	}
+
+}
