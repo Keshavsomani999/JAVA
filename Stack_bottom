@@ -1,0 +1,54 @@
+#Explanation
+
+
+- Program to insert an element at the Bottom of a Stack
+
+
+Example
+
+Input - 
+N = 4
+S = 1 <- (Top)
+      2
+     3
+    
+
+
+Output -
+
+3
+2
+1
+4
+
+package vaibhav;
+import java.util.*;
+
+public class Stack_Bottom {
+	public static void atBottom(Stack<Integer> s, int data) {
+		if(s.isEmpty()) {
+			s.push(data);
+			return;
+		}
+		
+		
+		int top = s.pop();
+		atBottom(s,data);
+		s.push(top);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Stack<Integer> s = new Stack<>();
+		s.push(1);
+		s.push(2);
+		s.push(3);
+		
+		atBottom(s,4);
+		while(!s.isEmpty()) {
+			System.out.println(s.pop());
+		}
+
+	}
+
+}
